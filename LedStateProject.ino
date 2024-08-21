@@ -8,26 +8,46 @@
 
 class Btn{
     public:
-        bool isOff = false;
+        bool isTouched = false;
         int pin;
 
         Btn(int pin){
-
+            this->pin = pin;
         }
+
+        bool isPressed(){
+            if digitalRead(this->pin == HIGH){
+                if (this->isTouched){
+                    this->isTouched == false;
+                    return true;
+                }
+            }else{
+                // beign touched coz pin == LOW
+                this->isTouched == true;
+                delay(BOUNCE_DELAY);
+                return ret;
+            }
+        }
+
 };
 
 
 class Project{
-    
+    private:
+        Btn _btn;
 
     public: 
         int led1, led2, led3, btn;
+
 
         Project(int led1, int led2, int led3, int btn){
             this->led1 = led1;
             this->led2 = led2;
             this->led3 = led3;
             this->btn = btn;
+
+            Btn _btn(btn);
+            this->_btn = _btn;
         }
 
         void setup(){
@@ -41,21 +61,15 @@ class Project{
             }
 
             pinMode(btn, INPUT);
+
             // Serial.println("--SETUP COMPLETE--");
         }
 
         void loop(){
-            if (isBtnDepressed()){
+            if (this->_btn.isPressed()){
                 Serial.println("Im depressed");
             }
         }
-
-        bool isBtnDepressed(){
-            bool ret = digitalRead(btn) == LOW;
-            delay(BOUNCE_DELAY);
-            return ret;
-        }
-
 };
 
 
