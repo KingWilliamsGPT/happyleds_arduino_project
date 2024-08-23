@@ -1,43 +1,39 @@
 <circuit version="1.1.0-SR0" rev="1917" stepSize="1000000" stepsPS="1000000" NLsteps="100000" reaStep="1000000" animate="0" >
 
-<item itemtype="Led" CircId="Led-57" mainComp="false" Show_id="false" Show_Val="false" Pos="28,-200" rotation="0" hflip="1" vflip="1" label="Led-57" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" Grounded="false" Threshold="2.4 V" MaxCurrent="30 mA" Resistance="0.6 Ω" />
-
-<item itemtype="Led" CircId="Led-58" mainComp="false" Show_id="false" Show_Val="false" Pos="152,-196" rotation="0" hflip="1" vflip="1" label="Led-58" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" Grounded="false" Threshold="2.4 V" MaxCurrent="30 mA" Resistance="0.6 Ω" />
-
-<item itemtype="Led" CircId="Led-59" mainComp="false" Show_id="false" Show_Val="false" Pos="320,-192" rotation="0" hflip="1" vflip="1" label="Led-59" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" Grounded="false" Threshold="2.4 V" MaxCurrent="30 mA" Resistance="0.6 Ω" />
-
-<item itemtype="Ground" CircId="Ground-63" mainComp="false" Show_id="false" Show_Val="false" Pos="452,-256" rotation="0" hflip="1" vflip="1" label="Ground-63" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
-
-<item itemtype="Subcircuit" CircId="Uno-66" mainComp="false" Show_id="true" Show_Val="false" Pos="476,-168" rotation="0" hflip="1" vflip="1" label="Uno-66" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Logic_Symbol="false">
-<mainCompProps MainCompId="mega328-109" Frequency="16 MHz" Program="../../../Downloads/ProgrammingBooks/arduino/arduino-programs/LedStateProject/jargons/LedStateProject.ino.hex" Auto_Load="false" saveEepr="true" SerialMon="-1" />
+<item itemtype="Subcircuit" CircId="Uno-66" mainComp="false" Show_id="true" Show_Val="false" Pos="596,-276" rotation="0" hflip="1" vflip="1" label="Uno-66" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Logic_Symbol="false">
+<mainCompProps MainCompId="mega328-109" Frequency="16 MHz" Auto_Load="false" saveEepr="true" SerialMon="1" />
 </item>
 
-<item itemtype="Push" CircId="Push-67" mainComp="false" Show_id="false" Show_Val="false" Pos="324,-80" rotation="0" hflip="1" vflip="1" label="Push-67" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
+<item itemtype="Push" CircId="Push-67" mainComp="false" Show_id="false" Show_Val="false" Pos="788,-180" rotation="0" hflip="1" vflip="1" label="Push-67" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
 
-<item itemtype="Rail" CircId="Rail-69" mainComp="false" ShowProp="Voltage" Show_id="false" Show_Val="true" Pos="108,-80" rotation="90" hflip="1" vflip="1" label="Rail-69" idLabPos="-5,-10" labelrot="-90" valLabPos="-12,6" valLabRot="-90" Voltage="5 V" />
+<item itemtype="Led" CircId="Led-94" mainComp="false" Show_id="false" Show_Val="false" Pos="448,-264" rotation="180" hflip="1" vflip="1" label="Led-94" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" Grounded="false" Threshold="2.4 V" MaxCurrent="30 mA" Resistance="0.6 Ω" />
 
-<item itemtype="Node" CircId="Node-64" mainComp="false" Pos="136,-296" />
+<item itemtype="Led" CircId="Led-97" mainComp="false" Show_id="false" Show_Val="false" Pos="448,-236" rotation="180" hflip="1" vflip="1" label="Led-97" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" Grounded="false" Threshold="2.4 V" MaxCurrent="30 mA" Resistance="0.6 Ω" />
 
-<item itemtype="Node" CircId="Node-65" mainComp="false" Pos="304,-296" />
+<item itemtype="Led" CircId="Led-98" mainComp="false" Show_id="false" Show_Val="false" Pos="448,-208" rotation="180" hflip="1" vflip="1" label="Led-98" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="Yellow" Grounded="false" Threshold="2.4 V" MaxCurrent="30 mA" Resistance="0.6 Ω" />
 
-<item itemtype="Connector" uid="Connector-124" startpinid="Led-58-lPin" endpinid="Node-64-1" pointList="136,-196,136,-296" />
+<item itemtype="Node" CircId="Node-99" mainComp="false" Pos="432,-236" />
 
-<item itemtype="Connector" uid="Connector-125" startpinid="Led-57-lPin" endpinid="Node-64-0" pointList="12,-200,12,-296,136,-296" />
+<item itemtype="Node" CircId="Node-100" mainComp="false" Pos="432,-208" />
 
-<item itemtype="Connector" uid="Connector-127" startpinid="Led-59-lPin" endpinid="Node-65-1" pointList="304,-192,304,-296" />
+<item itemtype="Connector" uid="Connector-137" startpinid="Push-67-pinP0" endpinid="Uno-66-5V0" pointList="772,-180,748,-180" />
 
-<item itemtype="Connector" uid="Connector-128" startpinid="Node-64-2" endpinid="Node-65-0" pointList="136,-296,304,-296" />
+<item itemtype="Connector" uid="Connector-138" startpinid="Push-67-switch0pinN" endpinid="Uno-66-5" pointList="804,-180,824,-180,824,-220,604,-220" />
 
-<item itemtype="Connector" uid="Connector-129" startpinid="Node-65-2" endpinid="Ground-63-Gnd" pointList="304,-296,452,-296,452,-272" />
+<item itemtype="Connector" uid="Connector-198" startpinid="Led-94-rPin" endpinid="Node-99-0" pointList="432,-264,432,-236" />
 
-<item itemtype="Connector" uid="Connector-130" startpinid="Led-59-rPin" endpinid="Uno-66-2" pointList="336,-192,440,-192,440,-136,484,-136" />
+<item itemtype="Connector" uid="Connector-199" startpinid="Node-99-2" endpinid="Led-97-rPin" pointList="432,-236,432,-236" />
 
-<item itemtype="Connector" uid="Connector-131" startpinid="Led-58-rPin" endpinid="Uno-66-3" pointList="168,-196,296,-196,296,-140,424,-140,424,-128,484,-128" />
+<item itemtype="Connector" uid="Connector-200" startpinid="Node-100-1" endpinid="Uno-66-GND2" pointList="432,-208,432,-140,604,-140" />
 
-<item itemtype="Connector" uid="Connector-132" startpinid="Led-57-rPin" endpinid="Uno-66-4" pointList="44,-200,132,-200,132,-140,288,-140,288,-120,484,-120" />
+<item itemtype="Connector" uid="Connector-201" startpinid="Node-99-1" endpinid="Node-100-0" pointList="432,-236,432,-208" />
 
-<item itemtype="Connector" uid="Connector-133" startpinid="Push-67-switch0pinN" endpinid="Uno-66-5" pointList="340,-80,448,-80,448,-112,484,-112" />
+<item itemtype="Connector" uid="Connector-202" startpinid="Node-100-2" endpinid="Led-98-rPin" pointList="432,-208,432,-208" />
 
-<item itemtype="Connector" uid="Connector-135" startpinid="Rail-69-outnod" endpinid="Push-67-pinP0" pointList="108,-64,308,-64,308,-80" />
+<item itemtype="Connector" uid="Connector-195" startpinid="Led-98-lPin" endpinid="Uno-66-4" pointList="464,-208,488,-208,488,-228,604,-228" />
+
+<item itemtype="Connector" uid="Connector-194" startpinid="Led-97-lPin" endpinid="Uno-66-3" pointList="464,-236,604,-236" />
+
+<item itemtype="Connector" uid="Connector-193" startpinid="Led-94-lPin" endpinid="Uno-66-2" pointList="464,-264,488,-264,488,-244,604,-244" />
 
 </circuit>

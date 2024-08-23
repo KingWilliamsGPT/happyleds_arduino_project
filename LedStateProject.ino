@@ -1,105 +1,118 @@
-#define LED1 2
-#define LED2 3
-#define LED3 4
+#define LED1 9
+#define LED2 10
+#define LED3 11
 #define BTN1 5
 #define BOUNCE_DELAY 10 //miliseconds
 #define SERIAL_SPEED 9600
+#define FLICKER_DELAY 100 //ms
 
+const int LEDS[] = {LED1, LED2, LED3};
+const int NO_LEDS = 3;
 
-class Btn{
-    public:
-        bool isTouched = false;
-        int pin;
-
-        Btn(int pin){
-            this->pin = pin;
-        }
-
-        bool isPressed(){
-            // Serial. 
-            // The button says yes to is pressed after it has just been depressed
-            if (digitalRead(this->pin == HIGH)){
-                if (this->isTouched){
-                    this->isTouched == false;
-                    return true;
-                }
-            }else{
-                // beign touched coz pin == LOW
-                this->isTouched == true;
-                delay(BOUNCE_DELAY);
-            }
-
-            return false;
-        }
-
+int currentState = 0;
+int states[] = {
+    0,       // all bulbs are off
+    1,       // all bulbs are on
+    2,       // only bulb 1 is on
+    3,       // only bulb 2 is on
+    4,       // only bulb 3 is on
+    5,       // continuous flickery
+    6,       // all bulbs are on low power
 };
+const int NO_STATES = 7;
 
+bool btn_is_pressed = false;
+bool allOn = false;
 
-class Project{
-    private:
-        bool _is_pressed = false;
-        int state = 0;
+void writeToPins(int pins[], int pins_len, int val, int avoid=-1, bool analog=false);
 
-    public: 
-        int led1, led2, led3, btn;
-
-
-        Project(int led1, int led2, int led3, int btn){
-            this->led1 = led1;
-            this->led2 = led2;
-            this->led3 = led3;
-            this->btn = btn;
-        }
-
-        void setup(){
-            // do some initial setup
-            Serial.begin(SERIAL_SPEED);
-            
-            int pins[] = {led1, led2, led3}, pin;
-            for(int i=0; i<3; i++){
-                pin = pins[i];
-                pinMode(pin, OUTPUT);
-            }
-
-            pinMode(btn, INPUT);
-
-            Serial.println("--SETUP COMPLETE2--");
-        }
-
-        void loop(){
-            if(this->buttonIsClicked()){
-                // switch state 
-            }
-        }
-
-        void setPressed(bool v){
-            this->_is_pressed = v;
-        }
-
-        bool buttonIsClicked(){
-            if (digitalRead(this->btn) == HIGH){
-                if(!this->_is_pressed){
-                    setPressed(true);
-                }    
-            } else{
-                if(this->_is_pressed){
-                    // Serial.println("clicked!!");
-                    setPressed(false);
-                    delay(BOUNCE_DELAY);
-                    return true;
-                }
-            }
-            return false;
-        }
-};
-
-
-Project project(LED1, LED2, LED3, BTN1);
 
 void setup(){
-    project.setup();
+    Serial.begin(SERIAL_SPEED);
+
+    for(int i=0; i<NO_LEDS; i++){
+        int pin = LEDS[i];
+        pinMode(pin, OUTPUT);
+    }
+
+    pinMode(BTN1, INPUT);
+
+    Serial.println("Done");
 }
 
+
 void loop(){
-    project.loop();
+
+    if(btnIsPressed()){
+        nextState();
+    }
+
+    doState();
+
+}
+
+
+bool btnIsPressed(){
+    if(digitalRead(BTN1) == HIGH){
+        btn_is_pressed = true;
+    }else{
+        if(btn_is_pressed){
+            btn_is_pressed = false;
+            delay(BOUNCE_DELAY);
+            return true;
+        }
+    }
+    return false;
+}
+
+void nextState(){
+    currentState++;
+    if(currentState>NO_STATES-1){
+        currentState=0;
+    }
+}
+
+void doState(){
+    int state = currentState;
+    if(state == 0){
+        offLeds();
+    } else if(state == 1){
+        onLeds();
+    } else if (state == 2 || state == 3 || state == 4){
+        int pin = LEDS[state-2];
+        writeToPins(LEDS, NO_LEDS, LOW, pin);     // turn off other pins
+        digitalWrite(pin, HIGH);
+    } else if (state == 5){
+        onLeds();
+        delay(FLICKER_DELAY);
+        offLeds();
+        delay(FLICKER_DELAY);
+    } else if (state == 6){
+        // allOn = !allOn;  // toggle on/off
+        // writeToPins(LEDS, 3, allOn);
+        writeToPins(LEDS, NO_LEDS, 125, -1, true);
+    }
+}
+
+
+void onLeds(){
+    writeToPins(LEDS, NO_LEDS, HIGH);
+}
+
+void offLeds(){
+    writeToPins(LEDS, NO_LEDS, LOW);
+}
+
+void writeToPins(int pins[], int pins_len, int val, int avoid, bool analog){
+    for(int i=0; i<pins_len; i++){
+        int pin = LEDS[i];
+        if (pin == avoid){
+            continue;
+        }
+        if(analog){
+            analogWrite(pin, val);
+        }else{
+            digitalWrite(pin, val);
+        }
+    }
 }
